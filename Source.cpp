@@ -1,9 +1,15 @@
 #include<iostream>
 #include<cmath>
+#include <cstdint>
 #include<map>
+#include <vector>
+#include <ctime>
+#include <csignal>
 #include<queue>
 #include<fstream>
 #include<string>
+#include <sstream>
+#include <bitset>
 using namespace std;
 
 map<char, string> queMap;
@@ -105,15 +111,7 @@ void HuffmanCodes(int size)
    
     frequencyMap.clear();
    
-    /*
-    while (!minHeap.empty()) {        //check whether pq empty or not
-        MinHeapNode* m = minHeap.top();
-        minHeap.pop();                 //erasing content one by one
-        
-    }
-    if (minHeap.empty())
-        cout<<"Queue cleared" << endl;
-  */
+  
    
 }
 
@@ -252,10 +250,32 @@ int main()
 
 
     encodedString = encodeHuffman(inputString);
-    cout << "\nEncoded String:\n" << encodedString << endl;
+   
+//Prints the Binary
+       //cout << "\nEncoded String:\n" << encodedString << endl;
+    //Converts to the ASCII
+
+    stringstream sstream(encodedString);
+    string output;
+    while (sstream.good())
+    {
+        std::bitset<8> bits;
+        sstream >> bits;
+        char c = char(bits.to_ulong());
+        output += c;
+    }
+    
+
+   
+    //std::cout << output;
+    cout << "\nEncoded String:\n" << output << endl;
+
+    g = output;
+    // g = encodedString;
 
 
-    g = encodedString;
+
+
 
     //Create a new file for encoded text
     encodedFile.open("encoded_1.txt", ios::out);  // open a file to perform write operation using file object
@@ -272,7 +292,7 @@ int main()
         string encodedString;
         while (getline(encodedFile, fileString2)) {  //read data from file object and put it into string.
             //cout << fileString2 << "\n";   //print the data of the string
-            newSize = fileString2.length() / 8;
+            newSize = fileString2.length();
             cout << "This string is " << newSize << " bytes. \n";
         }
         //CLear file flags
@@ -331,10 +351,23 @@ int main()
     displayFrequency(inputString);
     
     encodedString = encodeHuffman(inputString);
-    cout << "\nEncoded String:\n" << encodedString << endl;
+    //Prints the Binary
+    //cout << "\nEncoded String:\n" << encodedString << endl;
+    output.clear();
+    stringstream satream(encodedString);
+    while (satream.good())
+    {
+        std::bitset<8> bits;
+        satream >> bits;
+        char c = char(bits.to_ulong());
+        output += c;
+    }
 
+    //std::cout << output;
+    cout << "\nEncoded String:\n" << output << endl;
 
-    g = encodedString;
+    g = output;
+    // g = encodedString;
 
     //Create a new file for encoded text
     encodedFile_2.open("encoded_2.txt", ios::out);  // open a file to perform write operation using file object
@@ -352,7 +385,7 @@ int main()
         while (getline(encodedFile_2, fileString)) {  //read data from file object and put it into string.
 
            // cout << fileString << "\n";   //print the data of the string
-            newSize = fileString.length() / 8;
+            newSize = fileString.length() ;
             cout << "This string is " << newSize << " bytes. \n";
         }
         //CLear file flags
@@ -413,10 +446,23 @@ int main()
     
 
     encodedString = encodeHuffman(inputString);
-    cout << "\nEncoded String:\n" << encodedString << endl;
+    //Prints the Binary
+    //cout << "\nEncoded String:\n" << encodedString << endl;
+    output.clear();
+    stringstream sbtream(encodedString);
+    while (sbtream.good())
+    {
+        std::bitset<8> bits;
+        sbtream >> bits;
+        char c = char(bits.to_ulong());
+        output += c;
+    }
 
+    //std::cout << output;
+    cout << "\nEncoded String:\n" << output << endl;
 
-    g = encodedString;
+    g = output;
+    // g = encodedString;
 
     //Create a new file for encoded text
     encodedFile_3.open("encoded_3.txt", ios::out);  // open a file to perform write operation using file object
@@ -434,7 +480,7 @@ int main()
         while (getline(encodedFile_3, fileString)) {  //read data from file object and put it into string.
 
            // cout << fileString << "\n";   //print the data of the string
-            newSize = fileString.length() / 8;
+            newSize = fileString.length() ;
             cout << "This string is " << newSize << " bytes. \n";
         }
         //CLear file flags
@@ -493,10 +539,22 @@ int main()
 
 
     encodedString = encodeHuffman(inputString);
-    cout << "\nEncoded String:\n" << encodedString << endl;
+    //Prints the Binary
+    //cout << "\nEncoded String:\n" << encodedString << endl;
 
+    while (sstream.good())
+    {
+        std::bitset<8> bits;
+        sstream >> bits;
+        char c = char(bits.to_ulong());
+        output += c;
+    }
 
-    g = encodedString;
+    //std::cout << output;
+    cout << "\nEncoded String:\n" << output << endl;
+
+    g = output;
+    // g = encodedString;
 
     //Create a new file for encoded text
     encodedFile_4.open("encoded_4.txt", ios::out);  // open a file to perform write operation using file object
@@ -514,7 +572,7 @@ int main()
         while (getline(encodedFile_4, fileString)) {  //read data from file object and put it into string.
 
            // cout << fileString << "\n";   //print the data of the string
-            newSize = fileString.length() / 8;
+            newSize = fileString.length() ;
             cout << "This string is " << newSize << " bytes. \n";
         }
         //CLear file flags
@@ -573,10 +631,22 @@ int main()
 
 
     encodedString = encodeHuffman(inputString);
-    cout << "\nEncoded String:\n" << encodedString << endl;
+    //Prints the Binary
+   //cout << "\nEncoded String:\n" << encodedString << endl;
 
+    while (sstream.good())
+    {
+        std::bitset<8> bits;
+        sstream >> bits;
+        char c = char(bits.to_ulong());
+        output += c;
+    }
 
-    g = encodedString;
+    //std::cout << output;
+    cout << "\nEncoded String:\n" << output << endl;
+
+    g = output;
+    // g = encodedString;
 
     //Create a new file for encoded text
     encodedFile_5.open("encoded_5.txt", ios::out);  // open a file to perform write operation using file object
@@ -594,7 +664,7 @@ int main()
         while (getline(encodedFile_5, fileString)) {  //read data from file object and put it into string.
 
            // cout << fileString << "\n";   //print the data of the string
-            newSize = fileString.length() / 8;
+            newSize = fileString.length() ;
             cout << "This string is " << newSize << " bytes. \n";
         }
         //CLear file flags
@@ -653,10 +723,22 @@ int main()
 
 
     encodedString = encodeHuffman(inputString);
-    cout << "\nEncoded String:\n" << encodedString << endl;
+    //Prints the Binary
+   //cout << "\nEncoded String:\n" << encodedString << endl;
 
+    while (sstream.good())
+    {
+        std::bitset<8> bits;
+        sstream >> bits;
+        char c = char(bits.to_ulong());
+        output += c;
+    }
 
-    g = encodedString;
+    //std::cout << output;
+    cout << "\nEncoded String:\n" << output << endl;
+
+    g = output;
+    // g = encodedString;
 
     //Create a new file for encoded text
     encodedFile_6.open("encoded_6.txt", ios::out);  // open a file to perform write operation using file object
@@ -674,7 +756,7 @@ int main()
         while (getline(encodedFile_6, fileString)) {  //read data from file object and put it into string.
 
            // cout << fileString << "\n";   //print the data of the string
-            newSize = fileString.length() / 8;
+            newSize = fileString.length() ;
             cout << "This string is " << newSize << " bytes. \n";
         }
         //CLear file flags
@@ -733,10 +815,22 @@ int main()
 
 
     encodedString = encodeHuffman(inputString);
-    cout << "\nEncoded String:\n" << encodedString << endl;
+    //Prints the Binary
+   //cout << "\nEncoded String:\n" << encodedString << endl;
 
+    while (sstream.good())
+    {
+        std::bitset<8> bits;
+        sstream >> bits;
+        char c = char(bits.to_ulong());
+        output += c;
+    }
 
-    g = encodedString;
+    //std::cout << output;
+    cout << "\nEncoded String:\n" << output << endl;
+
+    g = output;
+    // g = encodedString;
 
     //Create a new file for encoded text
     encodedFile_7.open("encoded_7.txt", ios::out);  // open a file to perform write operation using file object
@@ -754,7 +848,7 @@ int main()
         while (getline(encodedFile_7, fileString)) {  //read data from file object and put it into string.
 
            // cout << fileString << "\n";   //print the data of the string
-            newSize = fileString.length() / 8;
+            newSize = fileString.length() ;
             cout << "This string is " << newSize << " bytes. \n";
         }
         //CLear file flags
@@ -813,10 +907,22 @@ int main()
 
 
     encodedString = encodeHuffman(inputString);
-    cout << "\nEncoded String:\n" << encodedString << endl;
+    //Prints the Binary
+   //cout << "\nEncoded String:\n" << encodedString << endl;
 
+    while (sstream.good())
+    {
+        std::bitset<8> bits;
+        sstream >> bits;
+        char c = char(bits.to_ulong());
+        output += c;
+    }
 
-    g = encodedString;
+    //std::cout << output;
+    cout << "\nEncoded String:\n" << output << endl;
+
+    g = output;
+    // g = encodedString;
 
     //Create a new file for encoded text
     encodedFile_8.open("encoded_8.txt", ios::out);  // open a file to perform write operation using file object
@@ -834,7 +940,7 @@ int main()
         while (getline(encodedFile_8, fileString)) {  //read data from file object and put it into string.
 
            // cout << fileString << "\n";   //print the data of the string
-            newSize = fileString.length() / 8;
+            newSize = fileString.length() ;
             cout << "This string is " << newSize << " bytes. \n";
         }
         //CLear file flags
@@ -894,10 +1000,22 @@ int main()
 
 
     encodedString = encodeHuffman(inputString);
-    cout << "\nEncoded String:\n" << encodedString << endl;
+    //Prints the Binary
+    //cout << "\nEncoded String:\n" << encodedString << endl;
 
+    while (sstream.good())
+    {
+        std::bitset<8> bits;
+        sstream >> bits;
+        char c = char(bits.to_ulong());
+        output += c;
+    }
 
-    g = encodedString;
+    //std::cout << output;
+    cout << "\nEncoded String:\n" << output << endl;
+
+    g = output;
+    // g = encodedString;
 
     //Create a new file for encoded text
     encodedFile_9.open("encoded_9.txt", ios::out);  // open a file to perform write operation using file object
@@ -915,7 +1033,7 @@ int main()
         while (getline(encodedFile_9, fileString)) {  //read data from file object and put it into string.
 
            // cout << fileString << "\n";   //print the data of the string
-            newSize = fileString.length() / 8;
+            newSize = fileString.length() ;
             cout << "This string is " << newSize << " bytes. \n";
         }
         //CLear file flags
@@ -974,10 +1092,22 @@ int main()
 
 
     encodedString = encodeHuffman(inputString);
-    cout << "\nEncoded String:\n" << encodedString << endl;
+    //Prints the Binary
+     //cout << "\nEncoded String:\n" << encodedString << endl;
 
+    while (sstream.good())
+    {
+        std::bitset<8> bits;
+        sstream >> bits;
+        char c = char(bits.to_ulong());
+        output += c;
+    }
 
-    g = encodedString;
+    //std::cout << output;
+    cout << "\nEncoded String:\n" << output << endl;
+
+    g = output;
+    // g = encodedString;
 
     //Create a new file for encoded text
     encodedFile_10.open("encoded_10.txt", ios::out);  // open a file to perform write operation using file object
@@ -995,7 +1125,7 @@ int main()
         while (getline(encodedFile_10, fileString)) {  //read data from file object and put it into string.
 
            // cout << fileString << "\n";   //print the data of the string
-            newSize = fileString.length() / 8;
+            newSize = fileString.length() ;
             cout << "This string is " << newSize << " bytes. \n";
         }
         //CLear file flags
@@ -1054,10 +1184,22 @@ int main()
 
 
     encodedString = encodeHuffman(inputString);
-    cout << "\nEncoded String:\n" << encodedString << endl;
+    //Prints the Binary
+    //cout << "\nEncoded String:\n" << encodedString << endl;
 
+    while (sstream.good())
+    {
+        std::bitset<8> bits;
+        sstream >> bits;
+        char c = char(bits.to_ulong());
+        output += c;
+    }
 
-    g = encodedString;
+    //std::cout << output;
+    cout << "\nEncoded String:\n" << output << endl;
+
+    g = output;
+    // g = encodedString;
 
     //Create a new file for encoded text
     encodedFile_11.open("encoded_11.txt", ios::out);  // open a file to perform write operation using file object
@@ -1075,7 +1217,7 @@ int main()
         while (getline(encodedFile_11, fileString)) {  //read data from file object and put it into string.
 
            // cout << fileString << "\n";   //print the data of the string
-            newSize = fileString.length() / 8;
+            newSize = fileString.length() ;
             cout << "This string is " << newSize << " bytes. \n";
         }
         //CLear file flags
@@ -1134,10 +1276,22 @@ int main()
 
 
     encodedString = encodeHuffman(inputString);
-    cout << "\nEncoded String:\n" << encodedString << endl;
+    //Prints the Binary
+   //cout << "\nEncoded String:\n" << encodedString << endl;
 
+    while (sstream.good())
+    {
+        std::bitset<8> bits;
+        sstream >> bits;
+        char c = char(bits.to_ulong());
+        output += c;
+    }
 
-    g = encodedString;
+    //std::cout << output;
+    cout << "\nEncoded String:\n" << output << endl;
+
+    g = output;
+    // g = encodedString;
 
     //Create a new file for encoded text
     encodedFile_12.open("encoded_12.txt", ios::out);  // open a file to perform write operation using file object
@@ -1155,7 +1309,7 @@ int main()
         while (getline(encodedFile_12, fileString)) {  //read data from file object and put it into string.
 
            // cout << fileString << "\n";   //print the data of the string
-            newSize = fileString.length() / 8;
+            newSize = fileString.length() ;
             cout << "This string is " << newSize << " bytes. \n";
         }
         //CLear file flags
@@ -1214,10 +1368,22 @@ int main()
 
 
     encodedString = encodeHuffman(inputString);
-    cout << "\nEncoded String:\n" << encodedString << endl;
+    //Prints the Binary
+   //cout << "\nEncoded String:\n" << encodedString << endl;
 
+    while (sstream.good())
+    {
+        std::bitset<8> bits;
+        sstream >> bits;
+        char c = char(bits.to_ulong());
+        output += c;
+    }
 
-    g = encodedString;
+    //std::cout << output;
+    cout << "\nEncoded String:\n" << output << endl;
+
+    g = output;
+    // g = encodedString;
 
     //Create a new file for encoded text
     encodedFile_13.open("encoded_13.txt", ios::out);  // open a file to perform write operation using file object
@@ -1235,7 +1401,7 @@ int main()
         while (getline(encodedFile_13, fileString)) {  //read data from file object and put it into string.
 
            // cout << fileString << "\n";   //print the data of the string
-            newSize = fileString.length() / 8;
+            newSize = fileString.length() ;
             cout << "This string is " << newSize << " bytes. \n";
         }
         //CLear file flags
@@ -1294,10 +1460,22 @@ int main()
 
 
     encodedString = encodeHuffman(inputString);
-    cout << "\nEncoded String:\n" << encodedString << endl;
+    //Prints the Binary
+   //cout << "\nEncoded String:\n" << encodedString << endl;
 
+    while (sstream.good())
+    {
+        std::bitset<8> bits;
+        sstream >> bits;
+        char c = char(bits.to_ulong());
+        output += c;
+    }
 
-    g = encodedString;
+    //std::cout << output;
+    cout << "\nEncoded String:\n" << output << endl;
+
+    g = output;
+    // g = encodedString;
 
     //Create a new file for encoded text
     encodedFile_14.open("encoded_14.txt", ios::out);  // open a file to perform write operation using file object
@@ -1315,7 +1493,7 @@ int main()
         while (getline(encodedFile_14, fileString)) {  //read data from file object and put it into string.
 
            // cout << fileString << "\n";   //print the data of the string
-            newSize = fileString.length() / 8;
+            newSize = fileString.length() ;
             cout << "This string is " << newSize << " bytes. \n";
         }
         //CLear file flags
@@ -1374,10 +1552,22 @@ int main()
 
 
     encodedString = encodeHuffman(inputString);
-    cout << "\nEncoded String:\n" << encodedString << endl;
+    //Prints the Binary
+   //cout << "\nEncoded String:\n" << encodedString << endl;
 
+    while (sstream.good())
+    {
+        std::bitset<8> bits;
+        sstream >> bits;
+        char c = char(bits.to_ulong());
+        output += c;
+    }
 
-    g = encodedString;
+    //std::cout << output;
+    cout << "\nEncoded String:\n" << output << endl;
+
+    g = output;
+    // g = encodedString;
 
     //Create a new file for encoded text
     encodedFile_15.open("encoded_15.txt", ios::out);  // open a file to perform write operation using file object
@@ -1395,7 +1585,7 @@ int main()
         while (getline(encodedFile_15, fileString)) {  //read data from file object and put it into string.
 
            // cout << fileString << "\n";   //print the data of the string
-            newSize = fileString.length() / 8;
+            newSize = fileString.length() ;
             cout << "This string is " << newSize << " bytes. \n";
         }
         //CLear file flags
@@ -1454,10 +1644,22 @@ int main()
 
 
     encodedString = encodeHuffman(inputString);
-    cout << "\nEncoded String:\n" << encodedString << endl;
+    //Prints the Binary
+     //cout << "\nEncoded String:\n" << encodedString << endl;
 
+    while (sstream.good())
+    {
+        std::bitset<8> bits;
+        sstream >> bits;
+        char c = char(bits.to_ulong());
+        output += c;
+    }
 
-    g = encodedString;
+    //std::cout << output;
+    cout << "\nEncoded String:\n" << output << endl;
+
+    g = output;
+    // g = encodedString;
 
     //Create a new file for encoded text
     encodedFile_16.open("encoded_16.txt", ios::out);  // open a file to perform write operation using file object
@@ -1475,7 +1677,7 @@ int main()
         while (getline(encodedFile_16, fileString)) {  //read data from file object and put it into string.
 
            // cout << fileString << "\n";   //print the data of the string
-            newSize = fileString.length() / 8;
+            newSize = fileString.length() ;
             cout << "This string is " << newSize << " bytes. \n";
         }
         //CLear file flags
@@ -1534,10 +1736,22 @@ int main()
 
 
     encodedString = encodeHuffman(inputString);
-    cout << "\nEncoded String:\n" << encodedString << endl;
+    //Prints the Binary
+     //cout << "\nEncoded String:\n" << encodedString << endl;
 
+    while (sstream.good())
+    {
+        std::bitset<8> bits;
+        sstream >> bits;
+        char c = char(bits.to_ulong());
+        output += c;
+    }
 
-    g = encodedString;
+    //std::cout << output;
+    cout << "\nEncoded String:\n" << output << endl;
+
+    g = output;
+    // g = encodedString;
 
     //Create a new file for encoded text
     encodedFile_17.open("encoded_17.txt", ios::out);  // open a file to perform write operation using file object
@@ -1555,7 +1769,7 @@ int main()
         while (getline(encodedFile_17, fileString)) {  //read data from file object and put it into string.
 
            // cout << fileString << "\n";   //print the data of the string
-            newSize = fileString.length() / 8;
+            newSize = fileString.length() ;
             cout << "This string is " << newSize << " bytes. \n";
         }
         //CLear file flags
@@ -1614,10 +1828,22 @@ int main()
 
 
     encodedString = encodeHuffman(inputString);
-    cout << "\nEncoded String:\n" << encodedString << endl;
+    //Prints the Binary
+   //cout << "\nEncoded String:\n" << encodedString << endl;
 
+    while (sstream.good())
+    {
+        std::bitset<8> bits;
+        sstream >> bits;
+        char c = char(bits.to_ulong());
+        output += c;
+    }
 
-    g = encodedString;
+    //std::cout << output;
+    cout << "\nEncoded String:\n" << output << endl;
+
+    g = output;
+    // g = encodedString;
 
     //Create a new file for encoded text
     encodedFile_18.open("encoded_18.txt", ios::out);  // open a file to perform write operation using file object
@@ -1635,7 +1861,7 @@ int main()
         while (getline(encodedFile_18, fileString)) {  //read data from file object and put it into string.
 
            // cout << fileString << "\n";   //print the data of the string
-            newSize = fileString.length() / 8;
+            newSize = fileString.length() ;
             cout << "This string is " << newSize << " bytes. \n";
         }
         //CLear file flags
@@ -1695,10 +1921,22 @@ int main()
 
 
     encodedString = encodeHuffman(inputString);
-    cout << "\nEncoded String:\n" << encodedString << endl;
+    //Prints the Binary
+    //cout << "\nEncoded String:\n" << encodedString << endl;
 
+    while (sstream.good())
+    {
+        std::bitset<8> bits;
+        sstream >> bits;
+        char c = char(bits.to_ulong());
+        output += c;
+    }
 
-    g = encodedString;
+    //std::cout << output;
+    cout << "\nEncoded String:\n" << output << endl;
+
+    g = output;
+    // g = encodedString;
 
     //Create a new file for encoded text
     encodedFile_19.open("encoded_19.txt", ios::out);  // open a file to perform write operation using file object
@@ -1716,7 +1954,7 @@ int main()
         while (getline(encodedFile_19, fileString)) {  //read data from file object and put it into string.
 
            // cout << fileString << "\n";   //print the data of the string
-            newSize = fileString.length() / 8;
+            newSize = fileString.length() ;
             cout << "This string is " << newSize << " bytes. \n";
         }
         //CLear file flags
@@ -1749,7 +1987,7 @@ int main()
     originalFile_20.open("original_20.txt", ios::out);  // open a file to perform write operation using file object
     if (originalFile.is_open())     //checking whether the file is open
     {
-        originalFile_20 << "Starwars is better than star trek in my opinion" << endl;; //inserting text
+        originalFile_20 << "The unanimous Declaration of the thirteen united States of America, When in the Course of human events, it becomes necessary for one people to dissolve the political bands which have connected them with another, and to assume among the powers of the earth, the separate and equal station to which the Laws of Nature and of Nature's God entitle them, a decent respect to the opinions of mankind requires that they should declare the causes which impel them to the separation. We hold these truths to be self - evident, that all men are created equal, that they are endowed by their Creator with certain unalienable Rights, that among these are Life, Libertyand the pursuit of Happiness.--That to secure these rights, Governments are instituted among Men, deriving their just powers from the consent of the governed, --That whenever any Form of Government becomes destructive of these ends, it is the Right of the People to alter or to abolish it, and to institute new Government, laying its foundation on such principlesand organizing its powers in such form, as to them shall seem most likely to effect their Safetyand Happiness.Prudence, indeed, will dictate that Governments long established should not be changed for lightand transient causes;and accordingly all experience hath shewn, that mankind are more disposed to suffer, while evils are sufferable, than to right themselves by abolishing the forms to which they are accustomed.But when a long train of abusesand usurpations, pursuing invariably the same Object evinces a design to reduce them under absolute Despotism, it is their right, it is their duty, to throw off such Government, and to provide new Guards for their future security.--Such has been the patient sufferance of these Colonies;and such is now the necessity which constrains them to alter their former Systems of Government.The history of the present King of Great Britain is a history of repeated injuriesand usurpations, all having in direct object the establishment of an absolute Tyranny over these States.To prove this, let Facts be submitted to a candid world." << endl;; //inserting text
         originalFile_20.close(); //close the file object
     }
 
@@ -1780,10 +2018,23 @@ int main()
 
 
     encodedString = encodeHuffman(inputString);
+    //Prints the Binary
     cout << "\nEncoded String:\n" << encodedString << endl;
+    output.clear();
+    stringstream sztream(encodedString);
+    while (sztream.good())
+    {
+        std::bitset<8> bits;
+        sztream >> bits;
+        char c = char(bits.to_ulong());
+        output += c;
+    }
 
+    //std::cout << output;
+    cout << "\nEncoded String:\n" << output << endl;
 
-    g = encodedString;
+    g = output;
+    // g = encodedString;
 
     //Create a new file for encoded text
     encodedFile_20.open("encoded_20.txt", ios::out);  // open a file to perform write operation using file object
@@ -1801,7 +2052,7 @@ int main()
         while (getline(encodedFile_20, fileString)) {  //read data from file object and put it into string.
 
            // cout << fileString << "\n";   //print the data of the string
-            newSize = fileString.length() / 8;
+            newSize = fileString.length() ;
             cout << "This string is " << newSize << " bytes. \n";
         }
         //CLear file flags
