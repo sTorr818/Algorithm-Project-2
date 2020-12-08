@@ -6,7 +6,7 @@
 #include<string>
 using namespace std;
 
-map<char, string> codesMap;
+map<char, string> queMap;
 map<char, int> frequencyMap;
 string g;
 float origSize, newSize;
@@ -37,7 +37,7 @@ struct compare
 
 
 
-void printCodes(struct MinHeapNode* root, string inputString)
+void printInput(struct MinHeapNode* root, string inputString)
 {
     
     if (!root)
@@ -49,14 +49,14 @@ void printCodes(struct MinHeapNode* root, string inputString)
     {
         cout << root->data << ": " << inputString << "\n";
     }
-    printCodes(root->left, inputString + "0");
-    printCodes(root->right, inputString + "1");
+    printInput(root->left, inputString + "0");
+    printInput(root->right, inputString + "1");
     
     
     
 }
 
-void storeCodes(struct MinHeapNode* root, string inputString)
+void storeQueue(struct MinHeapNode* root, string inputString)
 {
     if (root == NULL)
     {
@@ -67,11 +67,11 @@ void storeCodes(struct MinHeapNode* root, string inputString)
 
     if (root->data != '$')
     {
-        codesMap[root->data] = inputString;
+        queMap[root->data] = inputString;
     }
 
-    storeCodes(root->left, inputString + "0");
-    storeCodes(root->right, inputString + "1");
+    storeQueue(root->left, inputString + "0");
+    storeQueue(root->right, inputString + "1");
 }
 
 priority_queue<MinHeapNode*, vector<MinHeapNode*>, compare> minHeap;
@@ -97,10 +97,10 @@ void HuffmanCodes(int size)
         top->right = right;
         minHeap.push(top);
     }
-    storeCodes(minHeap.top(), "");
+    storeQueue(minHeap.top(), "");
 
     cout << "Characters and their Codes:\n";
-    printCodes(minHeap.top(), "");
+    printInput(minHeap.top(), "");
     // Attempting to reset the heap
    
     frequencyMap.clear();
@@ -197,7 +197,7 @@ string encodeHuffman(string inputString)
 
     for (auto i : inputString)
     {
-        encodedString += codesMap[i];
+        encodedString += queMap[i];
     }
     return encodedString;
     
@@ -206,8 +206,8 @@ string encodeHuffman(string inputString)
 void resetTree(struct MinHeapNode* root, string inputString)
 {
     struct MinHeapNode* current = root;
-    storeCodes(NULL,inputString);
-    //codesMap.clear();
+    storeQueue(NULL,inputString);
+    //queMap.clear();
     frequencyMap.clear();
 
 }
