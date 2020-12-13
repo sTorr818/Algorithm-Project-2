@@ -210,6 +210,22 @@ void resetTree(struct MinHeapNode* root, string inputString)
 
 }
 
+string conversion(string encodedString)
+{
+    stringstream sstream(encodedString);
+    string output;
+    while (sstream.good())
+    {
+        std::bitset<8> bits;
+        sstream >> bits;
+        char c = char(bits.to_ulong());
+        output += c;
+    }
+     
+    return output;
+
+
+}
 
 int main()
 {
@@ -218,6 +234,11 @@ int main()
     // string inputString = "All falls into place";
     string encodedString;
     string decodedString;
+    string output;
+    string asciiConversion;
+    int Q = 1;
+    cout << "File " << Q << ":\n";
+    Q++;
     //needed this to create the original file
     cout << "This is the original String\n";
     originalFile.open("original_1.txt", ios::out);  // open a file to perform write operation using file object
@@ -254,18 +275,18 @@ int main()
 //Prints the Binary
        //cout << "\nEncoded String:\n" << encodedString << endl;
     //Converts to the ASCII
-
-    stringstream sstream(encodedString);
+    /*
+    stringstream satream(encodedString);
     string output;
-    while (sstream.good())
+    while (satream.good())
     {
         std::bitset<8> bits;
-        sstream >> bits;
+        satream >> bits;
         char c = char(bits.to_ulong());
         output += c;
     }
-    
-
+    */
+    output = conversion(encodedString);
    
     //std::cout << output;
     cout << "\nEncoded String:\n" << output << endl;
@@ -286,13 +307,14 @@ int main()
         encodedFile << fileString2 << "\n"; //inserting text
         encodedFile.close(); //close the file object
     }
-    encodedFile.open("encoded_1.txt", ios::in); //open a file to perform read operation using file object
+    encodedFile.open("encoded_1.txt", ios::in | ios::binary); //open a file to perform read operation using file object
     if (encodedFile.is_open()) {   //checking whether the file is open
         string fileString2;
         string encodedString;
         while (getline(encodedFile, fileString2)) {  //read data from file object and put it into string.
             //cout << fileString2 << "\n";   //print the data of the string
-            newSize = fileString2.length();
+            newSize = newSize + fileString2.length();
+            cout << "This is a test for File 1 :\n" << fileString2 << endl;
             cout << "This string is " << newSize << " bytes. \n";
         }
         //CLear file flags
@@ -307,7 +329,8 @@ int main()
    decodedString = decodeString(minHeap.top(), encodedString);
    cout << "\nDecoded String:\n" << decodedString << endl;
 
-    cout << "Next File\n";
+    cout << "File " << Q << ":\n";
+    Q++;
     newSize = 0;
     origSize = 0;
     clearQue(inputString.length());
@@ -354,15 +377,7 @@ int main()
     //Prints the Binary
     //cout << "\nEncoded String:\n" << encodedString << endl;
     output.clear();
-    stringstream satream(encodedString);
-    while (satream.good())
-    {
-        std::bitset<8> bits;
-        satream >> bits;
-        char c = char(bits.to_ulong());
-        output += c;
-    }
-
+    output = conversion(encodedString);
     //std::cout << output;
     cout << "\nEncoded String:\n" << output << endl;
 
@@ -378,14 +393,15 @@ int main()
         encodedFile_2 << fileString << "\n"; //inserting text
         encodedFile_2.close(); //close the file object
     }
-    encodedFile_2.open("encoded_2.txt", ios::in); //open a file to perform read operation using file object
+    encodedFile_2.open("encoded_2.txt", ios::in | ios::binary); //open a file to perform read operation using file object
     if (encodedFile_2.is_open()) {   //checking whether the file is open
         string fileString;
         string encodedString;
         while (getline(encodedFile_2, fileString)) {  //read data from file object and put it into string.
 
            // cout << fileString << "\n";   //print the data of the string
-            newSize = fileString.length() ;
+            newSize = newSize + fileString.length();
+            cout << "This is a test for File 2 :\n" << fileString << endl;
             cout << "This string is " << newSize << " bytes. \n";
         }
         //CLear file flags
@@ -400,7 +416,9 @@ int main()
     decodedString = decodeString(minHeap.top(), encodedString);
     cout << "\nDecoded String:\n" << decodedString << endl;
 
-    cout << "\nNext File\n\n";
+    
+    cout << "\nFile " << Q << ":\n\n";
+    Q++;
     newSize = 0;
     origSize = 0;
     
@@ -415,7 +433,7 @@ int main()
     originalFile_3.open("original_3.txt", ios::out);  // open a file to perform write operation using file object
     if (originalFile.is_open())     //checking whether the file is open
     {
-        originalFile_3 << "By all means please go ahead" << endl;; //inserting text
+        originalFile_3 << "By all means please go ahead and take my children away to the local orphanage" << endl;; //inserting text
         originalFile_3.close(); //close the file object
     }
 
@@ -449,14 +467,7 @@ int main()
     //Prints the Binary
     //cout << "\nEncoded String:\n" << encodedString << endl;
     output.clear();
-    stringstream sbtream(encodedString);
-    while (sbtream.good())
-    {
-        std::bitset<8> bits;
-        sbtream >> bits;
-        char c = char(bits.to_ulong());
-        output += c;
-    }
+    output = conversion(encodedString);
 
     //std::cout << output;
     cout << "\nEncoded String:\n" << output << endl;
@@ -470,17 +481,19 @@ int main()
     {
         string fileString;
         fileString = g;
-        encodedFile_3 << fileString << "\n"; //inserting text
-        encodedFile_3.close(); //close the file object
+        encodedFile_3 << fileString ; //inserting text
+        encodedFile_3.close(); //close the file object    
     }
-    encodedFile_3.open("encoded_3.txt", ios::in); //open a file to perform read operation using file object
+    encodedFile_3.open("encoded_3.txt", ios::in | ios::binary); //open a file to perform read operation using file object
     if (encodedFile_3.is_open()) {   //checking whether the file is open
         string fileString;
         string encodedString;
-        while (getline(encodedFile_3, fileString)) {  //read data from file object and put it into string.
+        while (getline(encodedFile_3, fileString, '\t')) {  //read data from file object and put it into string.
 
            // cout << fileString << "\n";   //print the data of the string
-            newSize = fileString.length() ;
+            newSize = newSize + fileString.length();
+            
+            cout << "This is a test for File 3 :\n" << fileString << endl;
             cout << "This string is " << newSize << " bytes. \n";
         }
         //CLear file flags
@@ -495,7 +508,8 @@ int main()
     decodedString = decodeString(minHeap.top(), encodedString);
     cout << "\nDecoded String:\n" << decodedString << endl;
 
-    cout << "\nNext File\n\n";
+    cout << "\nFile " << Q << ":\n\n";
+    Q++;
     newSize = 0;
     origSize = 0;
     clearQue(inputString.length());
@@ -508,7 +522,7 @@ int main()
     originalFile_4.open("original_4.txt", ios::out);  // open a file to perform write operation using file object
     if (originalFile.is_open())     //checking whether the file is open
     {
-        originalFile_4 << "Apples and oranges are tasty " << endl;; //inserting text
+        originalFile_4 << "Apples and oranges are tasty but so are plums " << endl;; //inserting text
         originalFile_4.close(); //close the file object
     }
 
@@ -541,14 +555,8 @@ int main()
     encodedString = encodeHuffman(inputString);
     //Prints the Binary
     //cout << "\nEncoded String:\n" << encodedString << endl;
-
-    while (sstream.good())
-    {
-        std::bitset<8> bits;
-        sstream >> bits;
-        char c = char(bits.to_ulong());
-        output += c;
-    }
+    output.clear();
+    output = conversion(encodedString);
 
     //std::cout << output;
     cout << "\nEncoded String:\n" << output << endl;
@@ -565,14 +573,15 @@ int main()
         encodedFile_4 << fileString << "\n"; //inserting text
         encodedFile_4.close(); //close the file object
     }
-    encodedFile_4.open("encoded_4.txt", ios::in); //open a file to perform read operation using file object
+    encodedFile_4.open("encoded_4.txt", ios::in | ios::binary); //open a file to perform read operation using file object
     if (encodedFile_4.is_open()) {   //checking whether the file is open
         string fileString;
         string encodedString;
         while (getline(encodedFile_4, fileString)) {  //read data from file object and put it into string.
 
            // cout << fileString << "\n";   //print the data of the string
-            newSize = fileString.length() ;
+            newSize = newSize + fileString.length();
+            cout << "This is a test for File 3 :\n" << fileString << endl;
             cout << "This string is " << newSize << " bytes. \n";
         }
         //CLear file flags
@@ -587,7 +596,8 @@ int main()
     decodedString = decodeString(minHeap.top(), encodedString);
     cout << "\nDecoded String:\n" << decodedString << endl;
 
-    cout << "\nNext File\n\n";
+    cout << "\nFile " << Q << ":\n\n";
+    Q++;
     newSize = 0;
     origSize = 0;
     clearQue(inputString.length());
@@ -633,14 +643,8 @@ int main()
     encodedString = encodeHuffman(inputString);
     //Prints the Binary
    //cout << "\nEncoded String:\n" << encodedString << endl;
-
-    while (sstream.good())
-    {
-        std::bitset<8> bits;
-        sstream >> bits;
-        char c = char(bits.to_ulong());
-        output += c;
-    }
+    output.clear();
+    output = conversion(encodedString);
 
     //std::cout << output;
     cout << "\nEncoded String:\n" << output << endl;
@@ -657,14 +661,15 @@ int main()
         encodedFile_5 << fileString << "\n"; //inserting text
         encodedFile_5.close(); //close the file object
     }
-    encodedFile_5.open("encoded_5.txt", ios::in); //open a file to perform read operation using file object
+    encodedFile_5.open("encoded_5.txt", ios::in | ios::binary); //open a file to perform read operation using file object
     if (encodedFile_5.is_open()) {   //checking whether the file is open
         string fileString;
         string encodedString;
         while (getline(encodedFile_5, fileString)) {  //read data from file object and put it into string.
 
            // cout << fileString << "\n";   //print the data of the string
-            newSize = fileString.length() ;
+            newSize = newSize + fileString.length();
+            cout << "This is a test for File 5 :\n" << fileString << endl;
             cout << "This string is " << newSize << " bytes. \n";
         }
         //CLear file flags
@@ -679,7 +684,8 @@ int main()
     decodedString = decodeString(minHeap.top(), encodedString);
     cout << "\nDecoded String:\n" << decodedString << endl;
 
-    cout << "\nNext File\n\n";
+    cout << "\nFile " << Q << ":\n\n";
+    Q++;
     newSize = 0;
     origSize = 0;
     clearQue(inputString.length());
@@ -725,14 +731,8 @@ int main()
     encodedString = encodeHuffman(inputString);
     //Prints the Binary
    //cout << "\nEncoded String:\n" << encodedString << endl;
-
-    while (sstream.good())
-    {
-        std::bitset<8> bits;
-        sstream >> bits;
-        char c = char(bits.to_ulong());
-        output += c;
-    }
+    output.clear();
+    output = conversion(encodedString);
 
     //std::cout << output;
     cout << "\nEncoded String:\n" << output << endl;
@@ -749,14 +749,15 @@ int main()
         encodedFile_6 << fileString << "\n"; //inserting text
         encodedFile_6.close(); //close the file object
     }
-    encodedFile_6.open("encoded_6.txt", ios::in); //open a file to perform read operation using file object
+    encodedFile_6.open("encoded_6.txt", ios::in | ios::binary); //open a file to perform read operation using file object
     if (encodedFile_6.is_open()) {   //checking whether the file is open
         string fileString;
         string encodedString;
         while (getline(encodedFile_6, fileString)) {  //read data from file object and put it into string.
 
            // cout << fileString << "\n";   //print the data of the string
-            newSize = fileString.length() ;
+            newSize = newSize + fileString.length();
+            cout << "This is a test for File 6 :\n" << fileString << endl;
             cout << "This string is " << newSize << " bytes. \n";
         }
         //CLear file flags
@@ -771,7 +772,8 @@ int main()
     decodedString = decodeString(minHeap.top(), encodedString);
     cout << "\nDecoded String:\n" << decodedString << endl;
 
-    cout << "\nNext File\n\n";
+    cout << "\nFile " << Q << ":\n\n";
+    Q++;
     newSize = 0;
     origSize = 0;
     clearQue(inputString.length());
@@ -817,14 +819,8 @@ int main()
     encodedString = encodeHuffman(inputString);
     //Prints the Binary
    //cout << "\nEncoded String:\n" << encodedString << endl;
-
-    while (sstream.good())
-    {
-        std::bitset<8> bits;
-        sstream >> bits;
-        char c = char(bits.to_ulong());
-        output += c;
-    }
+    output.clear();
+    output = conversion(encodedString);
 
     //std::cout << output;
     cout << "\nEncoded String:\n" << output << endl;
@@ -841,14 +837,15 @@ int main()
         encodedFile_7 << fileString << "\n"; //inserting text
         encodedFile_7.close(); //close the file object
     }
-    encodedFile_7.open("encoded_7.txt", ios::in); //open a file to perform read operation using file object
+    encodedFile_7.open("encoded_7.txt", ios::in | ios::binary); //open a file to perform read operation using file object
     if (encodedFile_7.is_open()) {   //checking whether the file is open
         string fileString;
         string encodedString;
         while (getline(encodedFile_7, fileString)) {  //read data from file object and put it into string.
 
            // cout << fileString << "\n";   //print the data of the string
-            newSize = fileString.length() ;
+            newSize = newSize + fileString.length();
+            cout << "This is a test for File 7 :\n" << fileString << endl;
             cout << "This string is " << newSize << " bytes. \n";
         }
         //CLear file flags
@@ -863,7 +860,8 @@ int main()
     decodedString = decodeString(minHeap.top(), encodedString);
     cout << "\nDecoded String:\n" << decodedString << endl;
 
-    cout << "\nNext File\n\n";
+    cout << "\nFile " << Q << ":\n\n";
+    Q++;
     newSize = 0;
     origSize = 0;
     clearQue(inputString.length());
@@ -909,14 +907,8 @@ int main()
     encodedString = encodeHuffman(inputString);
     //Prints the Binary
    //cout << "\nEncoded String:\n" << encodedString << endl;
-
-    while (sstream.good())
-    {
-        std::bitset<8> bits;
-        sstream >> bits;
-        char c = char(bits.to_ulong());
-        output += c;
-    }
+    output.clear();
+    output = conversion(encodedString);
 
     //std::cout << output;
     cout << "\nEncoded String:\n" << output << endl;
@@ -933,14 +925,15 @@ int main()
         encodedFile_8 << fileString << "\n"; //inserting text
         encodedFile_8.close(); //close the file object
     }
-    encodedFile_8.open("encoded_8.txt", ios::in); //open a file to perform read operation using file object
+    encodedFile_8.open("encoded_8.txt", ios::in | ios::binary ); //open a file to perform read operation using file object
     if (encodedFile_8.is_open()) {   //checking whether the file is open
         string fileString;
         string encodedString;
         while (getline(encodedFile_8, fileString)) {  //read data from file object and put it into string.
 
            // cout << fileString << "\n";   //print the data of the string
-            newSize = fileString.length() ;
+            newSize = newSize + fileString.length();
+            cout << "This is a test for File 8 :\n" << fileString << endl;
             cout << "This string is " << newSize << " bytes. \n";
         }
         //CLear file flags
@@ -955,7 +948,8 @@ int main()
     decodedString = decodeString(minHeap.top(), encodedString);
     cout << "\nDecoded String:\n" << decodedString << endl;
 
-    cout << "\nNext File\n\n";
+    cout << "\nFile " << Q << ":\n\n";
+    Q++;
     newSize = 0;
     origSize = 0;
     clearQue(inputString.length());
@@ -1002,14 +996,8 @@ int main()
     encodedString = encodeHuffman(inputString);
     //Prints the Binary
     //cout << "\nEncoded String:\n" << encodedString << endl;
-
-    while (sstream.good())
-    {
-        std::bitset<8> bits;
-        sstream >> bits;
-        char c = char(bits.to_ulong());
-        output += c;
-    }
+    output.clear();
+    output = conversion(encodedString);
 
     //std::cout << output;
     cout << "\nEncoded String:\n" << output << endl;
@@ -1026,14 +1014,15 @@ int main()
         encodedFile_9 << fileString << "\n"; //inserting text
         encodedFile_9.close(); //close the file object
     }
-    encodedFile_9.open("encoded_9.txt", ios::in); //open a file to perform read operation using file object
+    encodedFile_9.open("encoded_9.txt", ios::in | ios::binary); //open a file to perform read operation using file object
     if (encodedFile_9.is_open()) {   //checking whether the file is open
         string fileString;
         string encodedString;
         while (getline(encodedFile_9, fileString)) {  //read data from file object and put it into string.
 
            // cout << fileString << "\n";   //print the data of the string
-            newSize = fileString.length() ;
+            newSize = newSize + fileString.length();
+            cout << "This is a test for File 9 :\n" << fileString << endl;
             cout << "This string is " << newSize << " bytes. \n";
         }
         //CLear file flags
@@ -1048,7 +1037,8 @@ int main()
     decodedString = decodeString(minHeap.top(), encodedString);
     cout << "\nDecoded String:\n" << decodedString << endl;
 
-    cout << "\nNext File\n\n";
+    cout << "\nFile " << Q << ":\n\n";
+    Q++;
     newSize = 0;
     origSize = 0;
     clearQue(inputString.length());
@@ -1094,14 +1084,8 @@ int main()
     encodedString = encodeHuffman(inputString);
     //Prints the Binary
      //cout << "\nEncoded String:\n" << encodedString << endl;
-
-    while (sstream.good())
-    {
-        std::bitset<8> bits;
-        sstream >> bits;
-        char c = char(bits.to_ulong());
-        output += c;
-    }
+    output.clear();
+    output = conversion(encodedString);
 
     //std::cout << output;
     cout << "\nEncoded String:\n" << output << endl;
@@ -1118,14 +1102,15 @@ int main()
         encodedFile_10 << fileString << "\n"; //inserting text
         encodedFile_10.close(); //close the file object
     }
-    encodedFile_10.open("encoded_10.txt", ios::in); //open a file to perform read operation using file object
+    encodedFile_10.open("encoded_10.txt", ios::in | ios::binary); //open a file to perform read operation using file object
     if (encodedFile_10.is_open()) {   //checking whether the file is open
         string fileString;
         string encodedString;
         while (getline(encodedFile_10, fileString)) {  //read data from file object and put it into string.
 
            // cout << fileString << "\n";   //print the data of the string
-            newSize = fileString.length() ;
+            newSize = newSize + fileString.length();
+            cout << "This is a test for File 10 :\n" << fileString << endl;
             cout << "This string is " << newSize << " bytes. \n";
         }
         //CLear file flags
@@ -1140,7 +1125,8 @@ int main()
     decodedString = decodeString(minHeap.top(), encodedString);
     cout << "\nDecoded String:\n" << decodedString << endl;
 
-    cout << "\nNext File\n\n";
+    cout << "\nFile " << Q << ":\n\n";
+    Q++;
     newSize = 0;
     origSize = 0;
     clearQue(inputString.length());
@@ -1186,14 +1172,8 @@ int main()
     encodedString = encodeHuffman(inputString);
     //Prints the Binary
     //cout << "\nEncoded String:\n" << encodedString << endl;
-
-    while (sstream.good())
-    {
-        std::bitset<8> bits;
-        sstream >> bits;
-        char c = char(bits.to_ulong());
-        output += c;
-    }
+    output.clear();
+    output = conversion(encodedString);
 
     //std::cout << output;
     cout << "\nEncoded String:\n" << output << endl;
@@ -1210,14 +1190,15 @@ int main()
         encodedFile_11 << fileString << "\n"; //inserting text
         encodedFile_11.close(); //close the file object
     }
-    encodedFile_11.open("encoded_11.txt", ios::in); //open a file to perform read operation using file object
+    encodedFile_11.open("encoded_11.txt", ios::in | ios::binary); //open a file to perform read operation using file object
     if (encodedFile_11.is_open()) {   //checking whether the file is open
         string fileString;
         string encodedString;
         while (getline(encodedFile_11, fileString)) {  //read data from file object and put it into string.
 
            // cout << fileString << "\n";   //print the data of the string
-            newSize = fileString.length() ;
+            newSize = newSize + fileString.length();
+            cout << "This is a test for File 11 :\n" << fileString << endl;
             cout << "This string is " << newSize << " bytes. \n";
         }
         //CLear file flags
@@ -1232,7 +1213,8 @@ int main()
     decodedString = decodeString(minHeap.top(), encodedString);
     cout << "\nDecoded String:\n" << decodedString << endl;
 
-    cout << "\nNext File\n\n";
+    cout << "\nFile " << Q << ":\n\n";
+    Q++;
     newSize = 0;
     origSize = 0;
     clearQue(inputString.length());
@@ -1278,14 +1260,8 @@ int main()
     encodedString = encodeHuffman(inputString);
     //Prints the Binary
    //cout << "\nEncoded String:\n" << encodedString << endl;
-
-    while (sstream.good())
-    {
-        std::bitset<8> bits;
-        sstream >> bits;
-        char c = char(bits.to_ulong());
-        output += c;
-    }
+    output.clear();
+    output = conversion(encodedString);
 
     //std::cout << output;
     cout << "\nEncoded String:\n" << output << endl;
@@ -1302,14 +1278,15 @@ int main()
         encodedFile_12 << fileString << "\n"; //inserting text
         encodedFile_12.close(); //close the file object
     }
-    encodedFile_12.open("encoded_12.txt", ios::in); //open a file to perform read operation using file object
+    encodedFile_12.open("encoded_12.txt", ios::in | ios::binary); //open a file to perform read operation using file object
     if (encodedFile_12.is_open()) {   //checking whether the file is open
         string fileString;
         string encodedString;
         while (getline(encodedFile_12, fileString)) {  //read data from file object and put it into string.
 
            // cout << fileString << "\n";   //print the data of the string
-            newSize = fileString.length() ;
+            newSize = newSize + fileString.length();
+            cout << "This is a test for File 12 :\n" << fileString << endl;
             cout << "This string is " << newSize << " bytes. \n";
         }
         //CLear file flags
@@ -1324,7 +1301,8 @@ int main()
     decodedString = decodeString(minHeap.top(), encodedString);
     cout << "\nDecoded String:\n" << decodedString << endl;
 
-    cout << "\nNext File\n\n";
+    cout << "\nFile " << Q << ":\n\n";
+    Q++;
     newSize = 0;
     origSize = 0;
     clearQue(inputString.length());
@@ -1370,14 +1348,8 @@ int main()
     encodedString = encodeHuffman(inputString);
     //Prints the Binary
    //cout << "\nEncoded String:\n" << encodedString << endl;
-
-    while (sstream.good())
-    {
-        std::bitset<8> bits;
-        sstream >> bits;
-        char c = char(bits.to_ulong());
-        output += c;
-    }
+    output.clear();
+    output = conversion(encodedString);
 
     //std::cout << output;
     cout << "\nEncoded String:\n" << output << endl;
@@ -1394,14 +1366,15 @@ int main()
         encodedFile_13 << fileString << "\n"; //inserting text
         encodedFile_13.close(); //close the file object
     }
-    encodedFile_13.open("encoded_13.txt", ios::in); //open a file to perform read operation using file object
+    encodedFile_13.open("encoded_13.txt", ios::in | ios::binary); //open a file to perform read operation using file object
     if (encodedFile_13.is_open()) {   //checking whether the file is open
         string fileString;
         string encodedString;
         while (getline(encodedFile_13, fileString)) {  //read data from file object and put it into string.
 
            // cout << fileString << "\n";   //print the data of the string
-            newSize = fileString.length() ;
+            newSize = newSize + fileString.length();
+            cout << "This is a test for File 13 :\n" << fileString << endl;
             cout << "This string is " << newSize << " bytes. \n";
         }
         //CLear file flags
@@ -1416,7 +1389,8 @@ int main()
     decodedString = decodeString(minHeap.top(), encodedString);
     cout << "\nDecoded String:\n" << decodedString << endl;
 
-    cout << "\nNext File\n\n";
+    cout << "\nFile " << Q << ":\n\n";
+    Q++;
     newSize = 0;
     origSize = 0;
     clearQue(inputString.length());
@@ -1462,14 +1436,8 @@ int main()
     encodedString = encodeHuffman(inputString);
     //Prints the Binary
    //cout << "\nEncoded String:\n" << encodedString << endl;
-
-    while (sstream.good())
-    {
-        std::bitset<8> bits;
-        sstream >> bits;
-        char c = char(bits.to_ulong());
-        output += c;
-    }
+    output.clear();
+    output = conversion(encodedString);
 
     //std::cout << output;
     cout << "\nEncoded String:\n" << output << endl;
@@ -1486,14 +1454,15 @@ int main()
         encodedFile_14 << fileString << "\n"; //inserting text
         encodedFile_14.close(); //close the file object
     }
-    encodedFile_14.open("encoded_14.txt", ios::in); //open a file to perform read operation using file object
+    encodedFile_14.open("encoded_14.txt", ios::in | ios::binary); //open a file to perform read operation using file object
     if (encodedFile_14.is_open()) {   //checking whether the file is open
         string fileString;
         string encodedString;
         while (getline(encodedFile_14, fileString)) {  //read data from file object and put it into string.
 
            // cout << fileString << "\n";   //print the data of the string
-            newSize = fileString.length() ;
+            newSize = newSize + fileString.length();
+            cout << "This is a test for File 14 :\n" << fileString << endl;
             cout << "This string is " << newSize << " bytes. \n";
         }
         //CLear file flags
@@ -1508,7 +1477,8 @@ int main()
     decodedString = decodeString(minHeap.top(), encodedString);
     cout << "\nDecoded String:\n" << decodedString << endl;
 
-    cout << "\nNext File\n\n";
+    cout << "\nFile " << Q << ":\n\n";
+    Q++;
     newSize = 0;
     origSize = 0;
     clearQue(inputString.length());
@@ -1554,14 +1524,8 @@ int main()
     encodedString = encodeHuffman(inputString);
     //Prints the Binary
    //cout << "\nEncoded String:\n" << encodedString << endl;
-
-    while (sstream.good())
-    {
-        std::bitset<8> bits;
-        sstream >> bits;
-        char c = char(bits.to_ulong());
-        output += c;
-    }
+    output.clear();
+    output = conversion(encodedString);
 
     //std::cout << output;
     cout << "\nEncoded String:\n" << output << endl;
@@ -1578,14 +1542,15 @@ int main()
         encodedFile_15 << fileString << "\n"; //inserting text
         encodedFile_15.close(); //close the file object
     }
-    encodedFile_15.open("encoded_15.txt", ios::in); //open a file to perform read operation using file object
+    encodedFile_15.open("encoded_15.txt", ios::in | ios::binary); //open a file to perform read operation using file object
     if (encodedFile_15.is_open()) {   //checking whether the file is open
         string fileString;
         string encodedString;
         while (getline(encodedFile_15, fileString)) {  //read data from file object and put it into string.
 
            // cout << fileString << "\n";   //print the data of the string
-            newSize = fileString.length() ;
+            newSize = newSize + fileString.length();
+            cout << "This is a test for File 15 :\n" << fileString << endl;
             cout << "This string is " << newSize << " bytes. \n";
         }
         //CLear file flags
@@ -1600,7 +1565,8 @@ int main()
     decodedString = decodeString(minHeap.top(), encodedString);
     cout << "\nDecoded String:\n" << decodedString << endl;
 
-    cout << "\nNext File\n\n";
+    cout << "\nFile " << Q << ":\n\n";
+    Q++;
     newSize = 0;
     origSize = 0;
     clearQue(inputString.length());
@@ -1646,15 +1612,8 @@ int main()
     encodedString = encodeHuffman(inputString);
     //Prints the Binary
      //cout << "\nEncoded String:\n" << encodedString << endl;
-
-    while (sstream.good())
-    {
-        std::bitset<8> bits;
-        sstream >> bits;
-        char c = char(bits.to_ulong());
-        output += c;
-    }
-
+    output.clear();
+    output = conversion(encodedString);
     //std::cout << output;
     cout << "\nEncoded String:\n" << output << endl;
 
@@ -1670,14 +1629,15 @@ int main()
         encodedFile_16 << fileString << "\n"; //inserting text
         encodedFile_16.close(); //close the file object
     }
-    encodedFile_16.open("encoded_16.txt", ios::in); //open a file to perform read operation using file object
+    encodedFile_16.open("encoded_16.txt", ios::in | ios::binary); //open a file to perform read operation using file object
     if (encodedFile_16.is_open()) {   //checking whether the file is open
         string fileString;
         string encodedString;
         while (getline(encodedFile_16, fileString)) {  //read data from file object and put it into string.
 
            // cout << fileString << "\n";   //print the data of the string
-            newSize = fileString.length() ;
+            newSize = newSize + fileString.length();
+            cout << "This is a test for File 16 :\n" << fileString << endl;
             cout << "This string is " << newSize << " bytes. \n";
         }
         //CLear file flags
@@ -1692,7 +1652,8 @@ int main()
     decodedString = decodeString(minHeap.top(), encodedString);
     cout << "\nDecoded String:\n" << decodedString << endl;
 
-    cout << "\nNext File\n\n";
+    cout << "\nFile " << Q << ":\n\n";
+    Q++;
     newSize = 0;
     origSize = 0;
     clearQue(inputString.length());
@@ -1738,15 +1699,8 @@ int main()
     encodedString = encodeHuffman(inputString);
     //Prints the Binary
      //cout << "\nEncoded String:\n" << encodedString << endl;
-
-    while (sstream.good())
-    {
-        std::bitset<8> bits;
-        sstream >> bits;
-        char c = char(bits.to_ulong());
-        output += c;
-    }
-
+    output.clear();
+    output = conversion(encodedString);
     //std::cout << output;
     cout << "\nEncoded String:\n" << output << endl;
 
@@ -1762,14 +1716,15 @@ int main()
         encodedFile_17 << fileString << "\n"; //inserting text
         encodedFile_17.close(); //close the file object
     }
-    encodedFile_17.open("encoded_17.txt", ios::in); //open a file to perform read operation using file object
+    encodedFile_17.open("encoded_17.txt", ios::in | ios::binary); //open a file to perform read operation using file object
     if (encodedFile_17.is_open()) {   //checking whether the file is open
         string fileString;
         string encodedString;
         while (getline(encodedFile_17, fileString)) {  //read data from file object and put it into string.
 
            // cout << fileString << "\n";   //print the data of the string
-            newSize = fileString.length() ;
+            newSize = newSize + fileString.length();
+            cout << "This is a test for File 17 :\n" << fileString << endl;
             cout << "This string is " << newSize << " bytes. \n";
         }
         //CLear file flags
@@ -1784,7 +1739,8 @@ int main()
     decodedString = decodeString(minHeap.top(), encodedString);
     cout << "\nDecoded String:\n" << decodedString << endl;
 
-    cout << "\nNext File\n\n";
+    cout << "\nFile " << Q << ":\n\n";
+    Q++;
     newSize = 0;
     origSize = 0;
     clearQue(inputString.length());
@@ -1831,13 +1787,8 @@ int main()
     //Prints the Binary
    //cout << "\nEncoded String:\n" << encodedString << endl;
 
-    while (sstream.good())
-    {
-        std::bitset<8> bits;
-        sstream >> bits;
-        char c = char(bits.to_ulong());
-        output += c;
-    }
+    output.clear();
+    output = conversion(encodedString);
 
     //std::cout << output;
     cout << "\nEncoded String:\n" << output << endl;
@@ -1854,14 +1805,15 @@ int main()
         encodedFile_18 << fileString << "\n"; //inserting text
         encodedFile_18.close(); //close the file object
     }
-    encodedFile_18.open("encoded_18.txt", ios::in); //open a file to perform read operation using file object
+    encodedFile_18.open("encoded_18.txt", ios::in | ios::binary); //open a file to perform read operation using file object
     if (encodedFile_18.is_open()) {   //checking whether the file is open
         string fileString;
         string encodedString;
         while (getline(encodedFile_18, fileString)) {  //read data from file object and put it into string.
 
            // cout << fileString << "\n";   //print the data of the string
-            newSize = fileString.length() ;
+            newSize = newSize + fileString.length();
+            cout << "This is a test for File 18 :\n" << fileString << endl;
             cout << "This string is " << newSize << " bytes. \n";
         }
         //CLear file flags
@@ -1876,7 +1828,8 @@ int main()
     decodedString = decodeString(minHeap.top(), encodedString);
     cout << "\nDecoded String:\n" << decodedString << endl;
 
-    cout << "\nNext File\n\n";
+    cout << "\nFile " << Q << ":\n\n";
+    Q++;
     newSize = 0;
     origSize = 0;
     clearQue(inputString.length());
@@ -1924,13 +1877,8 @@ int main()
     //Prints the Binary
     //cout << "\nEncoded String:\n" << encodedString << endl;
 
-    while (sstream.good())
-    {
-        std::bitset<8> bits;
-        sstream >> bits;
-        char c = char(bits.to_ulong());
-        output += c;
-    }
+    output.clear();
+    output = conversion(encodedString);
 
     //std::cout << output;
     cout << "\nEncoded String:\n" << output << endl;
@@ -1947,14 +1895,15 @@ int main()
         encodedFile_19 << fileString << "\n"; //inserting text
         encodedFile_19.close(); //close the file object
     }
-    encodedFile_19.open("encoded_19.txt", ios::in); //open a file to perform read operation using file object
+    encodedFile_19.open("encoded_19.txt", ios::in | ios::binary); //open a file to perform read operation using file object
     if (encodedFile_19.is_open()) {   //checking whether the file is open
         string fileString;
         string encodedString;
         while (getline(encodedFile_19, fileString)) {  //read data from file object and put it into string.
 
            // cout << fileString << "\n";   //print the data of the string
-            newSize = fileString.length() ;
+            newSize = newSize + fileString.length();
+            cout << "This is a test for File 19 :\n" << fileString << endl;
             cout << "This string is " << newSize << " bytes. \n";
         }
         //CLear file flags
@@ -1969,7 +1918,8 @@ int main()
     decodedString = decodeString(minHeap.top(), encodedString);
     cout << "\nDecoded String:\n" << decodedString << endl;
 
-    cout << "\nNext File\n\n";
+    cout << "\nFile " << Q << ":\n\n";
+    Q++;
     newSize = 0;
     origSize = 0;
 
@@ -2021,14 +1971,7 @@ int main()
     //Prints the Binary
     cout << "\nEncoded String:\n" << encodedString << endl;
     output.clear();
-    stringstream sztream(encodedString);
-    while (sztream.good())
-    {
-        std::bitset<8> bits;
-        sztream >> bits;
-        char c = char(bits.to_ulong());
-        output += c;
-    }
+    output = conversion(encodedString);
 
     //std::cout << output;
     cout << "\nEncoded String:\n" << output << endl;
@@ -2045,14 +1988,15 @@ int main()
         encodedFile_20 << fileString << "\n"; //inserting text
         encodedFile_20.close(); //close the file object
     }
-    encodedFile_20.open("encoded_20.txt", ios::in); //open a file to perform read operation using file object
+    encodedFile_20.open("encoded_20.txt", ios::in | ios::binary); //open a file to perform read operation using file object
     if (encodedFile_20.is_open()) {   //checking whether the file is open
         string fileString;
         string encodedString;
         while (getline(encodedFile_20, fileString)) {  //read data from file object and put it into string.
-
+            ///Undo to here
            // cout << fileString << "\n";   //print the data of the string
-            newSize = fileString.length() ;
+            newSize = newSize + fileString.length() ;
+            cout << "This is a test for File 20 :\n" << fileString << endl;
             cout << "This string is " << newSize << " bytes. \n";
         }
         //CLear file flags
@@ -2068,6 +2012,10 @@ int main()
     cout << "\nDecoded String:\n" << decodedString << endl;
 
     clearQue(inputString.length());
+
+
+
+
 
     return 0;
 }
